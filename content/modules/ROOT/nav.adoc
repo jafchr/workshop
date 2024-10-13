@@ -7,6 +7,8 @@
 ** xref:module-01.adoc#_building_a_backend_application_using_the_openshift_application_platform_with_openshift_pipelines[Building a backend application using the OpenShift Application Platform with OpenShift Pipelines]
 ** xref:module-01.adoc#_conclusion[1. Conclusion]
 ** xref:module-01.adoc#_more_information[1. More Information]
+* xref:module-02-gitops.adoc[2. The Power of GitOps with OpenShift GitOps]
+////
 * xref:module-02.adoc[2. The Power of GitOps with OpenShift GitOps]
 ** xref:module-02.adoc#_introduction[1. Introduction]
 ** xref:module-02.adoc#_openshift_gitops_architecture[2. OpenShift GitOps Architecture]
@@ -14,6 +16,7 @@
 ** xref:module-02.adoc#_deep_dive[4. Deep Dive]
 ** xref:module-02.adoc#_conclusion[5. Conclusion]
 ** xref:module-02.adoc#_more_information[6. More Information]
+////
 ////
 * xref:module-03.adoc[3. Trusted Software Supply Chain with OpenShift Pipelines]
 ** xref:module-03.adoc#_introduction[3. Introduction]
