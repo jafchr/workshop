@@ -8,6 +8,7 @@
 ** xref:module-01.adoc#_conclusion[1. Conclusion]
 ** xref:module-01.adoc#_more_information[1. More Information]
 * xref:module-02-gitops.adoc[2. The Power of GitOps with OpenShift GitOps]
+* xref:module-03-devsecops.adoc[3. Securing the Software Supply Chain with OpenShift and Red Hat ACS]
 ////
 * xref:module-02.adoc[2. The Power of GitOps with OpenShift GitOps]
 ** xref:module-02.adoc#_introduction[1. Introduction]
