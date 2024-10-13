@@ -1,0 +1,6 @@
+= Enhancing Developer Efficiency and Productivity with Red Trusted Application Pipeline  (60 mins) 
+
+To access the details of the workshop please login to the following URL:
+https://demo.redhat.com/workshop/n4vknq (please copy paste in a separate window or this is create an issue here).
+
+Use the same username as the one provided for the previous lab.
