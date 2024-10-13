@@ -1,0 +1,9 @@
+= Securing the Software Supply Chain with OpenShift Pipelines and Red Hat ACS (Advanced Cluster Security for Kubernetes) (60 mins) 
+
+To access the details of the workshop please login to the following URL:
+https://demo.redhat.com/workshop/gdhx5g (please copy paste in a separate window or this is create an issue here).
+
+Getting to know Red Hat ACS: 
+The lab guide is here: https://rhpds.github.io/openshift-security-roadshow/modules/01-visibility-and-navigation.html
+
+Use the same username as the one provided for the previous lab.
