@@ -11,8 +11,7 @@ In this Roadshow, you will learn the techniques and technologies for adopting ht
 
 * Learn how to leverage *Red Hat OpenShift*  as an *Application Platform Trusted - Comprehensive - Consistent capabilities*.
 * Dive into *CI/CD* pipelines using *OpenShift Pipelines*.
-* Adopt *DevOps* best practices securely with *OpenShift GitOps* and *Trusted Software Supply Chain*.
-* TBD
+* Adopt *DevOps* best practices securely with *OpenShift GitOps* and *Trusted Software Supply Chain*
 
 == 3. Environment Overview
 
