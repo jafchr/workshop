@@ -58,12 +58,12 @@ sed 's/$USERNUM/%USERNUM%/' ~/openshift-gitops-workshop/documentation/modules/RO
 The newly created Application appears as a tile with the title `bgd-app` in the
 Argo CD UI.
 
-image::argocd-app1.png[SampleApp]
+image::gitops-apps/argocd-app1.png[SampleApp]
 
 Clicking on this tile takes you to the application details page. You may see it
 as still progressing or fully synced.
 
-image::argocd-app2.png[SampleApp]
+image::gitops-apps/argocd-app2.png[SampleApp]
 
 At this point the application should be up and running. Verify that the
 resources were created:
@@ -127,7 +127,7 @@ you will get an _Application not available_ error. Do you know why that is?
 
 Your application should look like this.
 
-image::bgd.png[SampleApp]
+image::gitops-apps/bgd.png[SampleApp]
 
 === Addressing Configuration Drift
 
@@ -153,12 +153,12 @@ oc rollout status deploy/bgd -n user%USERNUM%-bgd
 Refresh the browser tab where your application is running. You should see green
 bubbles.
 
-image::bgd-green.png[BDG Green]
+image::gitops-apps/bgd-green.png[BDG Green]
 
 Looking over at your Argo CD Web UI, you can see that Argo detects your
 application as "Out of Sync".
 
-image::out-of-sync.png[Out of Sync]
+image::gitops-apps/out-of-sync.png[Out of Sync]
 
 You can sync your app via the Argo CD by:
 
@@ -173,7 +173,7 @@ image::fullysynced.png[Fully Synced]
 Reload the page on the tab where the application is running. The bubbles should
 have returned to their original blue color.
 
-image::bgd.png[BDG App]
+image::gitops-apps/bgd.png[BDG App]
 
 You can set up Argo CD to automatically correct drift by setting the `selfHeal`
 property of the `Application` manifest to do so. Using the example from link:#_deploy_the_application[above]:
