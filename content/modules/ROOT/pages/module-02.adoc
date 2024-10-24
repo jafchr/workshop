@@ -1,4 +1,4 @@
-= The Power of GitOps with OpenShift GitOps(45 mins) 
+= The Power of GitOps with OpenShift GitOps(60 mins) 
 
 In this module you will understand how GitOps is used to manage cluster configuration and application deployments. This module
 assumes you have some familiarity with Argo CD.
