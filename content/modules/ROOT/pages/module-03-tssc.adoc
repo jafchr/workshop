@@ -7,20 +7,6 @@ This section will showcase how OpenShift Platform Plus (OPP) can be used to prov
 DevSecOps stands for Development, Security and Operations, and is a hollistic approach that promotes continous security within your DevOps practices. Our example will highlight capabilities such as defining CI/CD pipelines CD with security gates, image scanning and signing, secure storage in a Trusted registry, and deployment to secured clusters with advanced security monitoring and alerting.
 
 
-== Application Architecture
-
-The following diagram shows a typical multicluster environment, with a central cluster called HUB, a several clusters covering the different environments from Development to production.
-
-* The first site is the Hub, which serves as the central point for managing and monitoring the cloud-native infrastructure. This is where we will be performing cluster management, advanced cluster security, and hosting a secure image registry, also known as OpenShift Platform Plus (OPP). This is where the DevSecOps pipeline is hosted and run. The developers will be submitting their code builds to the pipeline, and various security tools will be used throughout the pipeline to mitigate the risk of harmful applications or code being deployed in production. The security tools used in the pipeline will be demonstrated as part of the demo, including image scanning and signing, and security gates in the CI/CD pipeline.
-
-* The second site is the Development site (Dev), where a development version of the Globex application will be deployed using OpenShift GitOps (based on argocd).
-
-* The third site is the Secured Production (Prod) site, which is where applications will be securely deployed and monitored. This is the final destination for the applications that pass through the development pipeline and security checks. In this site, we will demonstrate advanced security monitoring and alerting, as well as how to securely manage and deploy applications across multiple clusters.
-
-image::/module3/application-architecture.png[width=80%]
-
-In our example, and for the sake of simplifying this lab, we will be co-locating the HUB and DEV cluster in the environment that we use.
-
 Let's examine all the components involved in such a DevSecOps pipeline to deploy our e-commerce application named Globex.
 
 == The DevSecOps pipeline
