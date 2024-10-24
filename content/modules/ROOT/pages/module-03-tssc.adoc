@@ -1,4 +1,4 @@
-= DevSecOps with OpenShift Platform Plus (30 mins)
+= DevSecOps with OpenShift Platform Plus (60 mins)
 
 == Introduction
 
