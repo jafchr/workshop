@@ -11,27 +11,3 @@
 * xref:module-02-apps.adoc [Deploying Applications with GitOps]
 * xref:module-03-tscc.adoc[3. Securing the Software Supply Chain with OpenShift and Red Hat ACS]
 * xref:module-04-tap.adoc[4. Enhancing Developer efficiency and Productivity with Red Hat Trusted Application Pipeline]
-////
-* xref:module-02.adoc[2. The Power of GitOps with OpenShift GitOps]
-** xref:module-02.adoc#_introduction[1. Introduction]
-** xref:module-02.adoc#_openshift_gitops_architecture[2. OpenShift GitOps Architecture]
-** xref:module-02.adoc#_workshop_architecture[3. Workshop Architecture]
-** xref:module-02.adoc#_deep_dive[4. Deep Dive]
-** xref:module-02-apps.adoc[5. Deploying Applications]
-** xref:module-02.adoc#_conclusion[6. Conclusion]
-** xref:module-02.adoc#_more_information[7. More Information]
-////
-////
-* xref:module-03.adoc[3. Trusted Software Supply Chain with OpenShift Pipelines]
-** xref:module-03.adoc#_introduction[3. Introduction]
-** xref:module-03.adoc#_conclusion[3. Conclusion]
-** xref:module-03.adoc#_more_information[3. More Information]
-* xref:module-04.adoc[4. Deep Dive on Trusted Software Supply Chain ]
-** xref:module-04.adoc#_introduction[4. Introduction]
-** xref:module-04.adoc#_conclusion[4. Conclusion]
-** xref:module-04.adoc#_more_information[4. More Information]
-* xref:module-05.adoc[5. Observability and Monitoring ]
-** xref:module-05.adoc#_introduction[5. Introduction]
-** xref:module-05.adoc#_conclusion[5. Conclusion]
-** xref:module-05.adoc#_more_information[5. More Information]
-////
