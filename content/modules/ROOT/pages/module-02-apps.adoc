@@ -112,7 +112,7 @@ From the OpenShift web console, select *user%USERNUM%-bgd* Project from
 drop-down menu, and use the _Topology_ view to find the link as you did with
 the Argo CD console.
 
-image::bgdapp.png[BGD App]
+image::gitops-apps/bgdapp.png[BGD App]
 
 Alternatively, get the app Route from the CLI:
 
@@ -168,7 +168,7 @@ You can sync your app via the Argo CD by:
 After the sync process is done, the Argo CD UI should mark the application as in
 sync.
 
-image::fullysynced.png[Fully Synced]
+image::gitops-apps/fullysynced.png[Fully Synced]
 
 Reload the page on the tab where the application is running. The bubbles should
 have returned to their original blue color.
