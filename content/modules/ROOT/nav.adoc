@@ -10,5 +10,5 @@
 * xref:module-02.adoc[2. The Power of GitOps with OpenShift GitOps]
 * xref:module-02-apps.adoc[3. Deploying Applications with GitOps]
 * xref:module-02-helm.adoc[4. Using Helm with GitOps]
-* xref:module-03-tssc.adoc[4. Securing the Software Supply Chain with OpenShift and Red Hat ACS]
-* xref:module-04-tap.adoc[5. Enhancing Developer efficiency and Productivity with Red Hat Trusted Application Pipeline]
+* xref:module-03-tssc.adoc[5. Securing the Software Supply Chain with OpenShift and Red Hat ACS]
+* xref:module-04-tap.adoc[6. Enhancing Developer efficiency and Productivity with Red Hat Trusted Application Pipeline]
