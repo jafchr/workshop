@@ -1,0 +1,199 @@
+In this section we will cover the basics of deploying an application with argocd using manifests in a git repository.
+
+=== Deploy the Application
+
+A managed collection of manifests is known as an `Application` within Argo CD.
+Therefore, you must define it as such using an
+link:https://argo-cd.readthedocs.io/en/stable/operator-manual/declarative-setup/#applications[Application
+CR (CustomResource)^] in order to have Argo CD apply these manifests in your
+cluster.
+
+Let's review the `Application` manifest used to deploy this application (found link:https://github.com/OpenShiftDemos/openshift-gitops-workshop/blob/master/documentation/modules/ROOT/examples/bgd-app.yaml[here,window="_blank"])
+and break this down a bit:
+
+.link:https://github.com/OpenShiftDemos/openshift-gitops-workshop/blob/master/documentation/modules/ROOT/examples/bgd-app.yaml[bgd-app.yaml,window="_blank"]
+[source,yaml,subs="+macros,attributes+"]
+----
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: bgd-app
+spec:
+  destination:
+    namespace: user$USERNUM-bgd
+    server: https://kubernetes.default.svc <1>
+  project: default <2>
+  source: <3>
+    path: documentation/modules/ROOT/examples/bgd
+    repoURL: https://github.com/OpenShiftDemos/openshift-gitops-workshop
+    targetRevision: master
+  syncPolicy: <4>
+    automated:
+      prune: true
+      selfHeal: false
+----
+<1> The destination server is API endpoint for the cluster where Argo CD is
+  running -- in this case, using the locally-resolveable URL for the cluster
+<2> Here you're installing the application in Argo CD's `default` project
+  (`.spec.project`).
+[NOTE]
+Argo CD's concept of a `Project` is different than OpenShift's. Here you're
+installing the application in Argo CD's `default` project (`.spec.project`).
+*NOT* OpenShift's default project.
+<3> The manifest repo, and the path within it where the YAML resides.
+<4> The `syncPolicy` is set to `automated`. It will automatically prune
+  resources that have been removed from the Git repo, but will not automatically
+  correct resources that deviate from the definition stored in the repo, i.e
+  manual changes made using `oc` or `kubectl` will not be "healed".
+
+You will create an Application by slightly modifying the provided example inline
+using the command below:
+
+[.console-input]
+[source,bash,subs="attributes+,+macros"]
+----
+sed 's/$USERNUM/%USERNUM%/' ~/openshift-gitops-workshop/documentation/modules/ROOT/examples/bgd-app.yaml | oc apply -n user%USERNUM%-argocd -f -
+----
+
+The newly created Application appears as a tile with the title `bgd-app` in the
+Argo CD UI.
+
+image::argocd-app1.png[SampleApp]
+
+Clicking on this tile takes you to the application details page. You may see it
+as still progressing or fully synced.
+
+image::argocd-app2.png[SampleApp]
+
+At this point the application should be up and running. Verify that the
+resources were created:
+
+[.console-input]
+[source,bash,subs="attributes+,+macros"]
+----
+oc get all -n user%USERNUM%-bgd
+----
+
+The output should list several things:
+
+[.console-output]
+[source,bash,subs="attributes+,+macros"]
+----
+NAME                       READY   STATUS    RESTARTS   AGE
+pod/bgd-74cf584546-tlqdm   1/1     Running   0          12m
+
+NAME          TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
+service/bgd   ClusterIP   172.30.124.158   <none>        8080/TCP   12m
+
+NAME                  READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/bgd   1/1     1            1           12m
+
+NAME                             DESIRED   CURRENT   READY   AGE
+replicaset.apps/bgd-74cf584546   1         1         1       12m
+
+NAME                           HOST/PORT                                                       PATH   SERVICES   PORT   TERMINATION   WILDCARD
+route.route.openshift.io/bgd   bgd-user3-bgd.apps.cluster-7pjzx.7pjzx.sandbox141.opentlc.com          bgd        8080                 None
+----
+
+
+**Extra Credit:** Do you know why you have a ReplicaSet?
+
+Wait for the rollout of the new pods to happen in the deployment:
+
+[.console-input]
+[source,bash,subs="attributes+,+macros"]
+----
+oc rollout status deploy/bgd -n user%USERNUM%-bgd
+----
+
+If it is successful, you can now visit the deployed application in the browser.
+
+From the OpenShift web console, select *user%USERNUM%-bgd* Project from
+drop-down menu, and use the _Topology_ view to find the link as you did with
+the Argo CD console.
+
+image::bgdapp.png[BGD App]
+
+Alternatively, get the app Route from the CLI:
+
+[.console-input]
+[source,bash,subs="attributes+,+macros"]
+----
+oc get route bgd -n user%USERNUM%-bgd -o jsonpath='{"http://"}{.spec.host}{"\n"}'
+----
+
+WARNING: This route is only available via HTTP. If you try to visit via HTTPS,
+you will get an _Application not available_ error. Do you know why that is?
+
+Your application should look like this.
+
+image::bgd.png[SampleApp]
+
+=== Addressing Configuration Drift
+
+Let's introduce a change in the application environment! Patch the live
+Deployment manifest to change the color of the bubbles in the application from
+blue to green:
+
+[.console-input]
+[source,bash,subs="attributes+,+macros"]
+
+----
+oc -n user%USERNUM%-bgd patch deploy/bgd --type='json' -p='[{"op": "replace", "path": "/spec/template/spec/containers/0/env/0/value", "value":"green"}]'
+----
+
+Wait for the rollout of the new pods to happen in the deployment:
+
+[.console-input]
+[source,bash,subs="attributes+,+macros"]
+----
+oc rollout status deploy/bgd -n user%USERNUM%-bgd
+----
+
+Refresh the browser tab where your application is running. You should see green
+bubbles.
+
+image::bgd-green.png[BDG Green]
+
+Looking over at your Argo CD Web UI, you can see that Argo detects your
+application as "Out of Sync".
+
+image::out-of-sync.png[Out of Sync]
+
+You can sync your app via the Argo CD by:
+
+* First clicking `SYNC`
+* Then clicking `SYNCHRONIZE`
+
+After the sync process is done, the Argo CD UI should mark the application as in
+sync.
+
+image::fullysynced.png[Fully Synced]
+
+Reload the page on the tab where the application is running. The bubbles should
+have returned to their original blue color.
+
+image::bgd.png[BDG App]
+
+You can set up Argo CD to automatically correct drift by setting the `selfHeal`
+property of the `Application` manifest to do so. Using the example from link:#_deploy_the_application[above]:
+
+[.console-input]
+[source,yaml,subs="attributes+,+macros"]
+----
+# bgd-app.yaml
+...
+spec:
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true # Set this to true
+----
+
+Or, as in our case, after the fact by running the following command:
+
+[.console-input]
+[source,bash,subs="attributes+,+macros"]
+----
+oc patch application/bgd-app -n user%USERNUM%-argocd --type=merge -p='{"spec":{"syncPolicy":{"automated":{"prune":true,"selfHeal":true}}}}'
+----
